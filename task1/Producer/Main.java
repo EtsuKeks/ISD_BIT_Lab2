@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
-        String serverAddress = "127.0.0.1";
+        String serverAddress = "host.docker.internal";
         int serverPort = 8097;
         String filePath = "file.txt";
 
