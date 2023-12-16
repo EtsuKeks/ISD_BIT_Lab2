@@ -14,18 +14,18 @@ RUN javac Main.java \
     ru/sber/karimullin/hw_3/Factory/Factory\$Counter.class ru/sber/karimullin/hw_3/Generator/Generator.class \
     ru/sber/karimullin/hw_3/RuntimeCompiler/RuntimeCompiler.class \
     ru/sber/karimullin/hw_3/RuntimeCompiler/RuntimeCompiler\$JavaSourceFromString.class \
-    && rm -rf ru && rm -rf Main.* MiniClass.* \
-    && nohup java -jar Consumer.jar &
+    && rm -rf ru && rm -rf Main.* MiniClass.*
 
 WORKDIR /ISD_BIT_Lab2/task1/Producer
 
 RUN javac Main.java \
     && jar cfe Producer.jar Main Main.class MiniClass.class \
-    && rm -rf Main.* MiniClass.* \
-    && nohup java -jar Producer.jar &
+    && rm -rf Main.* MiniClass.*
 
 WORKDIR /ISD_BIT_Lab2/task1
 
 RUN rm -rf Dockerfile init.sh
 
-RUN sleep infinity
+WORKDIR /
+
+CMD [""]
