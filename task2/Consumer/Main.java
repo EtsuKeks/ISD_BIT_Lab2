@@ -69,7 +69,6 @@ public class Main {
         String username = "user";
         String password = "password";
 
-
         System.out.println(jsoned);
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {

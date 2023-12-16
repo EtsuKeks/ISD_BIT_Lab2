@@ -1,41 +1,41 @@
 version: "3.7"
 
 services:
-
-  consumer:
-    container_name: consumer
-    image: karimullin_servers_image
-    restart: unless-stopped
-    networks:
-      karimullin_network:
-        ipv4_address: 172.18.0.2
-
-  producer:
-    container_name: producer
-    image: karimullin_servers_image
-    restart: unless-stopped
-    networks:
-      karimullin_network:
-        ipv4_address: 172.18.0.3
-
   db:
     container_name: mysql
-    image: karimullin_servers_image
+    image: karimullin_mysql
     restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: mydatabase
     volumes:
       - karimullin_db_data_volume:/root
     networks:
       karimullin_network:
         ipv4_address: 172.18.0.4
 
-  ansible:
-    container_name: ansible
-    image: karimullin_ansible_image
-    command: ansible-playbook -i inventories/hosts playbook.yml
-    restart: "no"
+  consumer:
+    container_name: consumer
+    image: karimullin_consumer
+    command: nohup java -cp .:/mysql-connector-java-8.0.30.jar Main &
+    restart: unless-stopped
     networks:
       karimullin_network:
-        ipv4_address: 172.18.0.5
+        ipv4_address: 172.18.0.2
+    depends_on:
+      - db
+
+  producer:
+    container_name: producer
+    image: karimullin_producer
+    command: nohup java -jar Producer.jar &
+    restart: unless-stopped
+    networks:
+      karimullin_network:
+        ipv4_address: 172.18.0.3
+    depends_on:
+      - consumer
+      - db
 
 networks:
   karimullin_network:
