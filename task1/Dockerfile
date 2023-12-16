@@ -1,5 +1,7 @@
 FROM openjdk:11
 
+EXPOSE 8097
+
 RUN apt-get update && apt-get install -y git \
     && rm -rf /var/lib/apt/lists/* \
     && git clone https://github.com/SexualWhiteChocolate/ISD_BIT_Lab2.git \
