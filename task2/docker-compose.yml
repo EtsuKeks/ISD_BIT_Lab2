@@ -1,0 +1,51 @@
+version: "3.7"
+
+services:
+
+  consumer:
+    container_name: consumer
+    image: karimullin_servers_image
+    restart: unless-stopped
+    networks:
+      karimullin_network:
+        ipv4_address: 172.18.0.2
+
+  producer:
+    container_name: producer
+    image: karimullin_servers_image
+    restart: unless-stopped
+    networks:
+      karimullin_network:
+        ipv4_address: 172.18.0.3
+
+  db:
+    container_name: mysql
+    image: karimullin_servers_image
+    restart: unless-stopped
+    volumes:
+      - karimullin_db_data_volume:/root
+    networks:
+      karimullin_network:
+        ipv4_address: 172.18.0.4
+
+  ansible:
+    container_name: ansible
+    image: karimullin_ansible_image
+    command: ansible-playbook -i inventories/hosts playbook.yml
+    restart: "no"
+    networks:
+      karimullin_network:
+        ipv4_address: 172.18.0.5
+
+networks:
+  karimullin_network:
+    driver: bridge
+    name: karimullin_network
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+
+volumes:
+  karimullin_db_data_volume:
+    name: karimullin_db_data_volume
+    driver: local
