@@ -1,6 +1,10 @@
 #!/bin/bash
-nohup java -jar /ISD_BIT_Lab2/task1/Consumer/Consumer.jar &
-sleep 1
-nohup java -jar /ISD_BIT_Lab2/task1/Producer/Producer.jar &
+cd ISD_BIT_Lab2/task1/Consumer/
+nohup java -jar Consumer.jar &
+cd ..
+cd Producer/
+nohup java -jar Producer.jar &
 sleep 20
-cat /ISD_BIT_Lab2/task1/Consumer/db.txt
+cd ..
+cd Consumer/
+cat db.txt
