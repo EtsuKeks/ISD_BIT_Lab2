@@ -12,4 +12,6 @@ WORKDIR /ISD_BIT_Lab2/task2/Consumer
 RUN javac Main.java \
     && rm -rf ru && rm -rf Main.* MiniClass.*
 
+WORKDIR /ISD_BIT_Lab2/task2
+
 CMD [""]
