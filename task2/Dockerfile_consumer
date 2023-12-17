@@ -9,8 +9,7 @@ RUN apt-get update && apt-get install -y git \
 
 WORKDIR /ISD_BIT_Lab2/task2/Consumer
 
-RUN javac Main.java \
-    && rm -rf ru && rm -rf Main.* MiniClass.*
+RUN javac Main.java
 
 WORKDIR /ISD_BIT_Lab2/task2
 
