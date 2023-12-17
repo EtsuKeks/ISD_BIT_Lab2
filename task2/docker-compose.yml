@@ -25,7 +25,7 @@ services:
   consumer:
     container_name: consumer
     image: karimullin_consumer
-    command: nohup java -cp /Consumer:/Consumer/mysql-connector-java-8.0.30.jar Main &
+    command: nohup java -cp /ISD_BIT_Lab2/task2/Consumer:/ISD_BIT_Lab2/task2/Consumer/mysql-connector-java-8.0.30.jar Main &
     restart: unless-stopped
     networks:
       karimullin_network:
